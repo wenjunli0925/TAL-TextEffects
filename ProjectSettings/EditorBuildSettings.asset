@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Glitch.unity
     guid: a17e81c97f9ea4af6ae8e0265a03397a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Deform_2.unity
     guid: d735dde095efe47de84cbb17c19dea50
+  - enabled: 1
+    path: Assets/Scenes/Deform_1.unity
+    guid: e4ec602901ac846bc878906b22e49393
   m_configObjects: {}
