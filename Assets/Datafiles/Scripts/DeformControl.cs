@@ -18,13 +18,13 @@ public class DeformControl : MonoBehaviour
     public float yOffectSpeed;
     public float zOffectSpeed;
 
-    NoiseDeformer noiseDeformer;
+    public NoiseDeformer noiseDeformer;
 
 
 
     private void Awake()
     {
-        noiseDeformer = FindObjectOfType<NoiseDeformer>();
+        //noiseDeformer = FindObjectOfType<NoiseDeformer>();
     }
 
     // Start is called before the first frame update
@@ -39,14 +39,31 @@ public class DeformControl : MonoBehaviour
     {
         //change magnitude_scale value 
         Vector3 cameraDistance = Camera.main.transform.position - trackedObject.transform.position;
-        float distance = cameraDistance.magnitude - 8f;
-        Debug.Log(distance);
+        float distance = cameraDistance.magnitude;
+        Debug.Log("distance: " + distance);
 
-        float t = Mathf.InverseLerp(0f, 7f, distance);
-        magnitudeScale = Mathf.Lerp(3f, 0f, t);
-        Debug.Log(magnitudeScale);
+        if (distance <= 2.3)
+        {
+            magnitudeScale = 0;
+        }
+
+        if (distance > 2.3 && distance <= 5.1)
+        {
+            float t = Mathf.InverseLerp(3f, 5f, distance);
+            magnitudeScale = Mathf.Lerp(0f, 3f, t);
+        }
+
+        if(distance > 5.1)
+        {
+            float t = Mathf.InverseLerp(5f, 10f, distance);
+            magnitudeScale = Mathf.Lerp(3f, 0f, t);
+        }
+
+        Debug.Log("magnitudeScale:" + magnitudeScale);
 
         noiseDeformer.MagnitudeScalar = magnitudeScale;
+
+
 
         //change offset_offset value
         xOffset += xOffectSpeed * Time.deltaTime;
